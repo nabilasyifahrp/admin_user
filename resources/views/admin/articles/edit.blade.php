@@ -1,73 +1,78 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="container mt-4">
-  <h2 class="mb-4">Edit Artikel</h2>
+<div class="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-md mt-8">
+    <h2 class="text-2xl font-bold mb-6 text-purple-700 flex items-center gap-2">
+        ✏️ Edit Artikel
+    </h2>
 
-  @if ($errors->any())
-    <div class="alert alert-danger">
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-  @endif
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-700 p-4 rounded mb-6">
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-  <form action="{{ route('admin.articles.update', $article->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
+    <form action="{{ route('admin.articles.update', $article->id) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+        @csrf
+        @method('PUT')
 
-    <div class="mb-3">
-      <label for="title" class="form-label">Judul Artikel</label>
-      <input type="text" name="title" class="form-control" value="{{ old('title', $article->title) }}" required>
-    </div>
+        <div>
+            <label for="title" class="block text-gray-700 font-semibold mb-2">Judul Artikel</label>
+            <input type="text" name="title" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" value="{{ old('title', $article->title) }}" required>
+        </div>
 
-    <div class="mb-3">
-      <label for="excerpt" class="form-label">Excerpt</label>
-      <textarea name="excerpt" class="form-control">{{ old('excerpt', $article->excerpt) }}</textarea>
-    </div>
+        <div>
+            <label for="excerpt" class="block text-gray-700 font-semibold mb-2">Excerpt</label>
+            <textarea name="excerpt" rows="3" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500">{{ old('excerpt', $article->excerpt) }}</textarea>
+        </div>
 
-    <div class="mb-3">
-      <label for="content" class="form-label">Konten</label>
-      <textarea name="content" id="ckeditor" class="form-control">{{ old('content', $article->content) }}</textarea>
-    </div>
+        <div>
+            <label for="content" class="block text-gray-700 font-semibold mb-2">Konten</label>
+            <textarea name="content" id="ckeditor" rows="6" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500">{{ old('content', $article->content) }}</textarea>
+        </div>
 
-    <div class="mb-3">
-      <label for="thumbnail" class="form-label">Thumbnail Saat Ini</label><br>
-      @if ($article->thumbnail)
-        <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="Thumbnail" width="200" class="mb-2">
-      @endif
-      <input type="file" name="thumbnail" class="form-control">
-    </div>
+        <div>
+            <label for="thumbnail" class="block text-gray-700 font-semibold mb-2">Thumbnail Saat Ini</label><br>
+            @if ($article->thumbnail)
+                <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="Thumbnail" width="200" class="mb-4 rounded-lg shadow">
+            @endif
+            <input type="file" name="thumbnail" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500">
+        </div>
 
-    <div class="mb-3">
-      <label for="category" class="form-label">Kategori</label>
-      <input type="text" name="category" class="form-control" value="{{ old('category', $article->category) }}" required>
-    </div>
+        <div>
+            <label for="category" class="block text-gray-700 font-semibold mb-2">Kategori</label>
+            <input type="text" name="category" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" value="{{ old('category', $article->category) }}" required>
+        </div>
 
-    <div class="mb-3">
-      <label for="author" class="form-label">Author</label>
-      <input type="text" name="author" class="form-control" value="{{ old('author', $article->author) }}" required>
-    </div>
+        <div>
+            <label for="author" class="block text-gray-700 font-semibold mb-2">Author</label>
+            <input type="text" name="author" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" value="{{ old('author', $article->author) }}" required>
+        </div>
 
-    <div class="mb-3">
-      <label for="status" class="form-label">Status</label>
-      <select name="status" class="form-select" required>
-        <option value="draft" {{ old('status', $article->status) == 'draft' ? 'selected' : '' }}>Draft</option>
-        <option value="published" {{ old('status', $article->status) == 'published' ? 'selected' : '' }}>Published</option>
-        <option value="archived" {{ old('status', $article->status) == 'archived' ? 'selected' : '' }}>Archived</option>
-      </select>
-    </div>
+        <div>
+            <label for="status" class="block text-gray-700 font-semibold mb-2">Status</label>
+            <select name="status" class="w-full border-2 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" required>
+                <option value="draft" {{ old('status', $article->status) == 'draft' ? 'selected' : '' }}>Draft</option>
+                <option value="published" {{ old('status', $article->status) == 'published' ? 'selected' : '' }}>Published</option>
+                <option value="archived" {{ old('status', $article->status) == 'archived' ? 'selected' : '' }}>Archived</option>
+            </select>
+        </div>
 
-    <div class="mb-3">
-      <label for="published_at" class="form-label">Tanggal Publish</label>
-      <input type="datetime-local" name="published_at" class="form-control"
-        value="{{ old('published_at', \Carbon\Carbon::parse($article->published_at)->format('Y-m-d\TH:i')) }}">
-    </div>
+        <div>
+            <label for="published_at" class="block text-gray-700 font-semibold mb-2">Tanggal Publish</label>
+            <input type="datetime-local" name="published_at" class="w-full border-3 border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500" value="{{ old('published_at', \Carbon\Carbon::parse($article->published_at)->format('Y-m-d\TH:i')) }}">
+        </div>
 
-    <button type="submit" class="btn btn-primary">Update Artikel</button>
-  </form>
+        <div class="text-right">
+            <button type="submit" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 rounded-lg">
+                Update Artikel
+            </button>
+        </div>
+    </form>
 </div>
 @endsection
 

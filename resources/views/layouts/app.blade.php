@@ -14,14 +14,17 @@
 </head>
 <body class="bg-gradient-to-br from-purple-200 via-purple-300 to-purple-500 min-h-screen text-gray-800">
 
-    <nav class="bg-white shadow p-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-purple-700">📝 Artikel Admin</h1>
-        @auth
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">Logout</button>
-        </form>
-        @endauth
+    <nav class="bg-white shadow p-4">
+        <div class="container mx-auto flex justify-end">
+            @auth
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition">
+                    Logout
+                </button>
+            </form>
+            @endauth
+        </div>
     </nav>
 
     <main class="py-8">

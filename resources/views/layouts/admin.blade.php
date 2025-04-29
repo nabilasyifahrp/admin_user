@@ -13,7 +13,6 @@
             Admin Panel
         </div>
         <div class="flex gap-4">
-            <a href="{{ route('dashboard') }}" class="hover:underline">Dashboard</a>
             <form action="{{ route('logout') }}" method="POST">
                 @csrf
                 <button type="submit" class="hover:underline">Logout</button>

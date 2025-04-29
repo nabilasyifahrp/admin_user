@@ -3,16 +3,18 @@
 @section('content')
 <div class="min-h-screen bg-gradient-to-br from-purple-200 via-purple-300 to-purple-500 py-12 px-6 text-white">
     <div class="max-w-6xl mx-auto">
-        <div class="flex justify-between items-center mb-8">
-            <h2 class="text-3xl font-bold flex items-center gap-2">
-                📋 <span class="drop-shadow">Daftar Artikel</span>
-            </h2>
-            <a href="{{ route('admin.articles.create') }}"
-               class="bg-white text-purple-600 font-semibold px-4 py-2 rounded-xl shadow hover:bg-purple-100 transition">
-                + Tambah Artikel
-            </a>
-        </div>
+    <div class="flex justify-between items-center mb-8">
+    <h2 class="text-3xl font-bold flex items-center gap-2">
+        📋 <span class="drop-shadow">Daftar Artikel</span>
+    </h2>
 
+    <div class="flex items-center gap-4">
+        <a href="{{ route('admin.articles.create') }}"
+           class="bg-white text-purple-600 font-semibold px-4 py-2 rounded-xl shadow hover:bg-purple-100 transition">
+            + Tambah Artikel
+        </a>
+    </div>
+</div>
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <table class="min-w-full text-sm text-gray-700">
                 <thead class="bg-purple-200 text-purple-800 text-left">
